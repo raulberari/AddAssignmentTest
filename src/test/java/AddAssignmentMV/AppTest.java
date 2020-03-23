@@ -43,7 +43,7 @@ public class AppTest
     }
 
     @Test
-    public void addAssignmentBigNumberWeek() {
+    public void addAssignmentCheckNumberOfWeek() {
         TemaLabValidator vt=new TemaLabValidator();
         TemaLabXMLRepo tmrepo=new TemaLabXMLRepo(vt, "TemaLaboratorXML.xml");
         TemaLabXMLService tmsrv=new TemaLabXMLService(tmrepo);
