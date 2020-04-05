@@ -359,4 +359,120 @@ public class AppTest
             assertTrue("Group should be between 921 and 927", false);
         }
     }
+
+    @Test
+    public void addAssignmentShouldSucceed() {
+        TemaLabValidator validator = new TemaLabValidator();
+        TemaLabXMLRepo temaRepo = new TemaLabXMLRepo(validator, "StudentXML.xml");
+        TemaLabXMLService temaService = new TemaLabXMLService(temaRepo);
+
+        int repoSize = temaRepo.getSize();
+        String[] params = {"1", "GoodDescription", "2", "4"};
+        try {
+            temaService.add(params);
+        } catch (Exception ex) {
+            assertTrue("Could not add correct example", ex instanceof ValidatorException);
+        }
+        assertEquals(temaRepo.getSize(), repoSize + 1);
+    }
+
+    @Test
+    public void addAssignmentEmptyID() {
+        TemaLabValidator validator = new TemaLabValidator();
+        TemaLabXMLRepo temaRepo = new TemaLabXMLRepo(validator, "StudentXML.xml");
+        TemaLabXMLService temaService = new TemaLabXMLService(temaRepo);
+
+        int repoSize = temaRepo.getSize();
+        String[] params = {"", "GoodDescription", "2", "4"};
+        try {
+            temaService.add(params);
+        } catch (Exception ex) {
+            assertTrue("Id should not be the empty string", ex instanceof ValidatorException);
+        }
+        if (temaRepo.getSize() == repoSize + 1) {
+            assertTrue("Id should not be the empty string", false);
+        }
+    }
+
+    @Test
+    public void addAssignmentEmptyDescription() {
+        TemaLabValidator validator = new TemaLabValidator();
+        TemaLabXMLRepo temaRepo = new TemaLabXMLRepo(validator, "StudentXML.xml");
+        TemaLabXMLService temaService = new TemaLabXMLService(temaRepo);
+
+        int repoSize = temaRepo.getSize();
+        String[] params = {"1", "", "2", "4"};
+        try {
+            temaService.add(params);
+        } catch (Exception ex) {
+            assertTrue("Description should not be the empty string", ex instanceof ValidatorException);
+        }
+        if (temaRepo.getSize() == repoSize + 1) {
+            assertTrue("Description should not be the empty string", false);
+        }
+    }
+
+    @Test
+    public void addAssignmentAssignedWeekOutOfBounds() {
+        TemaLabValidator validator = new TemaLabValidator();
+        TemaLabXMLRepo temaRepo = new TemaLabXMLRepo(validator, "StudentXML.xml");
+        TemaLabXMLService temaService = new TemaLabXMLService(temaRepo);
+
+        int repoSize = temaRepo.getSize();
+        String[] params = {"1", "GoodDescription", "15", "4"};
+        try {
+            temaService.add(params);
+        } catch (Exception ex) {
+            assertTrue("AssignedWeek should be between 1 and 14", ex instanceof ValidatorException);
+        }
+        if (temaRepo.getSize() == repoSize + 1) {
+            assertTrue("AssignedWeek should be between 1 and 14", false);
+        }
+    }
+
+    @Test
+    public void addAssignmentDeadlineWeekOutOfBounds() {
+        TemaLabValidator validator = new TemaLabValidator();
+        TemaLabXMLRepo temaRepo = new TemaLabXMLRepo(validator, "StudentXML.xml");
+        TemaLabXMLService temaService = new TemaLabXMLService(temaRepo);
+
+        int repoSize = temaRepo.getSize();
+        String[] params = {"1", "GoodDescription", "2", "15"};
+        try {
+            temaService.add(params);
+        } catch (Exception ex) {
+            assertTrue("DeadlineWeek should be between 1 and 14", ex instanceof ValidatorException);
+        }
+        if (temaRepo.getSize() == repoSize + 1) {
+            assertTrue("DeadlineWeek should be between 1 and 14", false);
+        }
+    }
+
+    @Test
+    public void addAssignmentAlreadyAdded() {
+        TemaLabValidator validator = new TemaLabValidator();
+        TemaLabXMLRepo temaRepo = new TemaLabXMLRepo(validator, "StudentXML.xml");
+        TemaLabXMLService temaService = new TemaLabXMLService(temaRepo);
+
+        int repoSize = temaRepo.getSize();
+        String[] params = {"1", "GoodDescription", "2", "4"};
+        try {
+            temaService.add(params);
+        } catch (Exception ex) {
+            assertTrue("Could not add correct example", ex instanceof ValidatorException);
+        }
+        assertEquals(temaRepo.getSize(), repoSize + 1);
+        repoSize = temaRepo.getSize();
+        try {
+            temaService.add(params);
+        } catch (Exception ex) {
+            assertTrue("Could not add correct example", ex instanceof ValidatorException);
+        }
+        if (temaRepo.getSize() == repoSize + 1) {
+            assertTrue("Duplicate assignment added", false);
+        }
+        else if(temaRepo.getSize() == repoSize) {
+            assertTrue("Duplicate assignment not added", true);
+        }
+    }
 }
