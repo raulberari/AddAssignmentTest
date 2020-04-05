@@ -280,7 +280,7 @@ public class AppTest
         StudentXMLService studentService = new StudentXMLService(studentRepo);
 
         int repoSize = studentRepo.getSize();
-        String[] params = {"1", "Andrei Borza", "920", "andrei.borza.com", "Gabriel Mircea"};
+        String[] params = {"1", "Andrei Borza", "920", "andrei@borza.com", "Gabriel Mircea"};
         try {
             studentService.add(params);
         } catch (Exception ex) {
@@ -298,7 +298,7 @@ public class AppTest
         StudentXMLService studentService = new StudentXMLService(studentRepo);
 
         int repoSize = studentRepo.getSize();
-        String[] params = {"1", "Andrei Borza", "922", "andrei.borza.com", "Gabriel Mircea"};
+        String[] params = {"1", "Andrei Borza", "922", "andrei@borza.com", "Gabriel Mircea"};
         try {
             studentService.add(params);
         } catch (Exception ex) {
@@ -315,7 +315,7 @@ public class AppTest
         StudentXMLService studentService = new StudentXMLService(studentRepo);
 
         int repoSize = studentRepo.getSize();
-        String[] params = {"1", "Andrei Borza", "926", "andrei.borza.com", "Gabriel Mircea"};
+        String[] params = {"1", "Andrei Borza", "926", "andrei@borza.com", "Gabriel Mircea"};
         try {
             studentService.add(params);
         } catch (Exception ex) {
@@ -332,7 +332,7 @@ public class AppTest
         StudentXMLService studentService = new StudentXMLService(studentRepo);
 
         int repoSize = studentRepo.getSize();
-        String[] params = {"1", "Andrei Borza", "927", "andrei.borza.com", "Gabriel Mircea"};
+        String[] params = {"1", "Andrei Borza", "927", "andrei@borza.com", "Gabriel Mircea"};
         try {
             studentService.add(params);
         } catch (Exception ex) {
@@ -349,7 +349,7 @@ public class AppTest
         StudentXMLService studentService = new StudentXMLService(studentRepo);
 
         int repoSize = studentRepo.getSize();
-        String[] params = {"1", "Andrei Borza", "928", "andrei.borza.com", "Gabriel Mircea"};
+        String[] params = {"1", "Andrei Borza", "928", "andrei@borza.com", "Gabriel Mircea"};
         try {
             studentService.add(params);
         } catch (Exception ex) {
