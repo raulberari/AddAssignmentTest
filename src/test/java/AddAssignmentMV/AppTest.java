@@ -387,7 +387,7 @@ public class AppTest
         try {
             temaService.add(params);
         } catch (Exception ex) {
-            assertTrue("Id should not be the empty string", ex instanceof ValidatorException);
+            assertTrue("Id should not be the empty string", ex instanceof NumberFormatException);
         }
         if (temaRepo.getSize() == repoSize + 1) {
             assertTrue("Id should not be the empty string", false);
