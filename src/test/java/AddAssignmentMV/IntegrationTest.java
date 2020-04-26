@@ -91,4 +91,53 @@ public class IntegrationTest
         addStudentEmptyName();
         addGradeValueOutOfBounds();
     }
+
+    @Test
+    public void addStudentEmptyProfessor() {
+        StudentValidator validator = new StudentValidator();
+        StudentXMLRepo studentRepo = new StudentXMLRepo(validator, "StudentXML.xml");
+        StudentXMLService studentService = new StudentXMLService(studentRepo);
+
+        int repoSize = studentRepo.getSize();
+        String[] params = {"1", "Andrei Borza", "921", "andrei@borza.com", ""};
+        try {
+            studentService.add(params);
+        } catch (Exception ex) {
+            assertTrue("Professor should not be the empty string", ex instanceof ValidatorException);
+        }
+        if (studentRepo.getSize() == repoSize + 1) {
+            assertTrue("Professor should not be the empty string", false);
+        }
+    }
+
+    @Test
+    public void addAssignmentEmptyDescription() {
+        TemaLabValidator validator = new TemaLabValidator();
+        TemaLabXMLRepo temaRepo = new TemaLabXMLRepo(validator, "StudentXML.xml");
+        TemaLabXMLService temaService = new TemaLabXMLService(temaRepo);
+
+        int repoSize = temaRepo.getSize();
+        String[] params = {"1", "", "2", "4"};
+        try {
+            temaService.add(params);
+        } catch (Exception ex) {
+            assertTrue("Description should not be the empty string", ex instanceof ValidatorException);
+        }
+        if (temaRepo.getSize() == repoSize + 1) {
+            assertTrue("Description should not be the empty string", false);
+        }
+    }
+
+    @Test
+    public void addAssignmentIncremental() {
+        addStudentEmptyProfessor();
+        addAssignmentEmptyDescription();
+    }
+
+    @Test
+    public void addGradeIncremental() {
+        addStudentEmptyProfessor();
+        addAssignmentEmptyDescription();
+        addGradeValueOutOfBounds();
+    }
 }
